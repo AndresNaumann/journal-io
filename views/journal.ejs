@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Journal.io</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <h1>Welcome to Journal.io</h1>
+    <p>Write and save to the cloud</p>
+    <table>
+      <thead>
+        <th>Date</th>
+        <th>Entry</th>
+      </thead>
+
+      <% for (let i=0; i< aEntries.length; i++) { %>
+
+      <tr>
+        <td><%= aEntries[i].dateTime %></td>
+        <td><%= aEntries[i].entry %></td>
+        <td>
+          <form method="get" action="/edit/<%= aEntries[i].entry_id %>">
+            <button type="submit">Edit</button>
+          </form>
+        </td>
+        <td>
+          <form method="get" action="/delete/<%= aEntries[i].entry_id %>">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+
+      <% } %>
+    </table>
+  </body>
+</html>
