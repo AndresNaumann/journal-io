@@ -8,32 +8,37 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
+    <!-- <div class="row">
+      <div class="column"></div>
+      <div class="column"></div>
+    </div> -->
     <h1>Welcome to Journal.io</h1>
-    <p>Write and save to the cloud</p>
+    <h4>Write and save to the cloud</h4>
+
+    <% for (let i=0; i< aEntries.length; i++) { %>
+
     <table>
       <thead>
-        <th>Date</th>
-        <th>Entry</th>
-      </thead>
-
-      <% for (let i=0; i< aEntries.length; i++) { %>
-
-      <tr>
-        <td><%= aEntries[i].dateTime %></td>
-        <td><%= aEntries[i].entry %></td>
-        <td>
+        <th><%= aEntries[i].date %></th>
+        <th>
           <form method="get" action="/edit/<%= aEntries[i].entry_id %>">
             <button type="submit">Edit</button>
           </form>
-        </td>
-        <td>
+        </th>
+        <th>
           <form method="get" action="/delete/<%= aEntries[i].entry_id %>">
             <button type="submit">Delete</button>
           </form>
-        </td>
-      </tr>
-
-      <% } %>
+        </th>
+      </thead>
     </table>
+    <p id="entries"><%= aEntries[i].text %></p>
+    <br />
+
+    <% } %>
+
+    <form method="get" action="/addentry">
+      <button type="submit">Add Entry</button>
+    </form>
   </body>
 </html>

@@ -34,13 +34,27 @@ app.get("/addentry", (req, res) => {
   res.render("addentry");
 });
 
+app.post("/addentry", (req, res) => {
+  let sText = req.body.text;
+  let dateTime = req.body.date;
+
+  knex("entries")
+    .insert({
+      text: sText,
+      date: dateTime,
+    })
+    .then((results) => {
+      res.redirect("/journal");
+    });
+});
+
 app.get("/edit/:entryid", (req, res) => {
   knex
     .select()
     .from("entries")
     .where("entry_id", req.params.entryid)
     .then((result) => {
-      res.render("editEntry", { aEntries: result });
+      res.render("editentry", { aEntries: result });
     });
 });
 
@@ -55,16 +69,11 @@ app.post("/edit/:entryid", (req, res) => {
     });
 });
 
-app.post("/journal", (req, res) => {
-  let sText = req.body.text;
-  let dateTime = req.body.date;
-
+app.get("/delete/:entryid", (req, res) => {
   knex("entries")
-    .insert({
-      text: sText,
-      date: dateTime,
-    })
-    .then((results) => {
+    .where("entry_id", req.params.entryid)
+    .del()
+    .then((result) => {
       res.redirect("/journal");
     });
 });

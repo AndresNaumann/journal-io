@@ -6,5 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <form method="post" action="/edit/<%= aEntries[0].entry_id%>">
+      Date:
+      <input type="date" name="date" value="<%= aEntries[0].date%>" />
+      <br /><br />
+      Entry:
+      <textarea name="text"><%= aEntries[0].text%></textarea>
+      <br /><br />
+      <button type="submit">Update Entry</button>
+    </form>
+  </body>
 </html>
